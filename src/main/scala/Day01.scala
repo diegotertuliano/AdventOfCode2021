@@ -1,7 +1,7 @@
 import scala.util.Using
 import scala.io.Source
 
-@main def Day01: Unit =
+@main def Day01(): Unit =
   val fileName: String = "input/Day01"
   val numbers = Using.resource(Source.fromFile(fileName)) { source =>
     source.getLines.toList.map(_.toInt)
