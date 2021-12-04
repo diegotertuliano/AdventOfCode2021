@@ -17,15 +17,19 @@ object Day03 {
     val lineLength = lines.head.length
     val initial = List.fill(lineLength)(0)
 
-    lines.foldLeft(initial) { (acc, binaryArray) => {
-      acc.zip(binaryArray).map((a: Int, b: Char) => a + b.asDigit)
-    }
-    }.map { count =>
-      if (count >= halfFileInputLength)
-        ('1', '0')
-      else
-        ('0', '1')
-    }.unzip match {
+    lines
+      .foldLeft(initial) { (acc, binaryArray) =>
+        {
+          acc.zip(binaryArray).map((a: Int, b: Char) => a + b.asDigit)
+        }
+      }
+      .map { count =>
+        if (count >= halfFileInputLength)
+          ('1', '0')
+        else
+          ('0', '1')
+      }
+      .unzip match {
       case (mostCommonBits, leastCommonBits) =>
         (mostCommonBits.mkString, leastCommonBits.mkString)
     }
@@ -40,7 +44,6 @@ object Day03 {
         a * b
     }
   }
-
 
   def part2(lines: List[String]): Int = {
 
@@ -70,11 +73,13 @@ object Day03 {
   def main(args: Array[String]): Unit =
     val fileName: String = "input/Day03"
 
-    val lines = Using.resource(Source.fromFile(fileName)) { source =>
-      source.getLines.toList.map(stringParser.parse)
-    }.collect {
-      case Right((_, binaryString)) => binaryString
-    }
+    val lines = Using
+      .resource(Source.fromFile(fileName)) { source =>
+        source.getLines.toList.map(stringParser.parse)
+      }
+      .collect { case Right((_, binaryString)) =>
+        binaryString
+      }
 
     println(part1(lines))
 
