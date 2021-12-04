@@ -8,13 +8,12 @@ import scala.io.Source
   }
 
   def largerThanPrevious(numbers: List[Int]): Int =
-    numbers.sliding(2).foldLeft(0) {
-      (accumulator, consecutiveNumbers) =>
-        consecutiveNumbers match
-          case List(current, next) =>
-            if (current < next) accumulator + 1
-            else accumulator
-          case _ => ???
+    numbers.sliding(2).foldLeft(0) { (accumulator, consecutiveNumbers) =>
+      consecutiveNumbers match
+        case List(current, next) =>
+          if (current < next) accumulator + 1
+          else accumulator
+        case _ => ???
     }
 
   val sumLargerThanPreviousTwoMeasurements = largerThanPrevious(numbers)

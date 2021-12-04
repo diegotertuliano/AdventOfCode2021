@@ -52,15 +52,16 @@ object Day02 {
 
     coordinates.x * coordinates.y
 
-
   def main(args: Array[String]): Unit =
     val fileName: String = "input/Day02"
 
-    val lines: List[LineInput] = Using.resource(Source.fromFile(fileName)) { source =>
-      source.getLines.toList.map(lineParser.parse)
-    }.collect {
-      case Right(_, (movementType, movementInterval)) => LineInput(movementType, movementInterval)
-    }
+    val lines: List[LineInput] = Using
+      .resource(Source.fromFile(fileName)) { source =>
+        source.getLines.toList.map(lineParser.parse)
+      }
+      .collect { case Right(_, (movementType, movementInterval)) =>
+        LineInput(movementType, movementInterval)
+      }
 
     println(part1(lines))
 
